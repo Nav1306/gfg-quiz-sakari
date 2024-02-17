@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require ("cors");
 const quizRouter = require("./Router/quiz.router");
 const userData = require("./db/users");
+const {jwt} = require("jsonwebtoken")
 
 const app = express();
 app.use(cors());
@@ -18,18 +19,12 @@ app.use('/quiz' , quizRouter);
 
 app.post("/auth/login" , (req,res) => {
     const {username,password} = req.body;
-    let arr = userData.users;
-    let reqIndex = arr.findIndex((user) => {
-        if(user.username === username){
-            return true;
-        }
-    });
-    if(reqIndex === -1){
-        res.json("User not found");
-    }
-    else {
-        (arr[reqIndex].password === password) ? res.json({username,password,message:"Welcome User!!"}):
-        res.json("Incorrect Password !");
+    const isUserVerified = userData.users.some(user=>user.username === username && user.password === password);
+    if(isUserVerified){
+        const token = jwt.sign({id:username},process.env.SECRET_TOKEN);
+        res.json({username, token, message:"User Verified"})
+    }else {
+        res.status(401).json({message: "Invalid Credentials"})
     }
 })
 
