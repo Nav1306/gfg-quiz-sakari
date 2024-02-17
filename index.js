@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require ("cors");
 const quizRouter = require("./Router/quiz.router");
-const loginRouter = require("./Router/login.router");
+const loginRouter = require("./Router/auth.router");
 
 
 const app = express();
