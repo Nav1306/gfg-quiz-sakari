@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require ("cors");
 const quizRouter = require("./Router/quiz.router");
 const userData = require("./db/users");
-const {jwt} = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 
 const app = express();
 app.use(cors());
