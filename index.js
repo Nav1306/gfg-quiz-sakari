@@ -3,6 +3,7 @@ const cors = require ("cors");
 const quizRouter = require("./Router/quiz.router");
 const {loginRouter} = require("./Router/auth.router");
 const {signupRouter} = require("./Router/auth.router");
+const {authVerify} = require("../controllers/authController")
 
 
 const app = express();
@@ -16,7 +17,7 @@ app.get("/" , (req,res) => {
 });
 
 
-app.use('/quiz' , quizRouter);
+app.use('/quiz' ,authVerify, quizRouter);
 
 app.use("/auth/login" , loginRouter);
 app.use("/auth/signup" , signupRouter);
