@@ -3,7 +3,7 @@ const cors = require ("cors");
 const quizRouter = require("./Router/quiz.router");
 const {loginRouter} = require("./Router/auth.router");
 const {signupRouter} = require("./Router/auth.router");
-const {authVerify} = require("../controllers/authController")
+const {authVerify} = require("./controllers/authController")
 
 
 const app = express();
