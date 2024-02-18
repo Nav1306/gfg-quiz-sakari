@@ -4,7 +4,7 @@ const quizRouter = require("./Router/quiz.router");
 const {loginRouter} = require("./Router/auth.router");
 const {signupRouter} = require("./Router/auth.router");
 const pageNotFound = require("./middleware/pageNotFound");
-
+const quizzes = require ("./db/quizzes");
 
 const app = express();
 app.use(cors());
@@ -13,7 +13,7 @@ app.use(express.json());
 const PORT = 3000;
 
 app.get("/" , (req,res) => {
-    res.send("Hello Geeks !!");
+    res.json(quizzes);
 });
 
 
